@@ -1,0 +1,148 @@
+{% extends "index.html" %}
+{% block content %}
+{%load static%}
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('id_obdobi').addEventListener('change', (event) => {
+        var selectedValue = event.target.value;
+        document.getElementById('id_obdobi_hidden').value = selectedValue;
+    });
+});
+</script>
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Clusterizace dat</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Domů</a></li>
+        <li class="breadcrumb-item active">Clusterizace dat</li>
+    </ol>
+    <div class="card mb-4">
+    </div>
+    <!-- První formulář pro výběr období -->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4" style="min-height: 160px;">
+                <div class="card-body ">
+                    <form action="" method="get">
+                        <label class="mb-4"  for="id_obdobi">Vyberte volební období:</label>
+                        <select id="id_obdobi" name="id_obdobi" class="form-select" onchange="this.form.submit();">
+                            <option value="-1" {% if selected_obdobi == -1 %}selected{% endif %}>Všechna období</option>
+                            {% for obdobi in volebni_obdobi %}
+                            <option value="{{ obdobi.id_obdobi }}" {% if selected_obdobi == obdobi.id_obdobi %}selected{% endif %}>
+                                {{ obdobi.id_obdobi__zkratka }} : {{ obdobi.od_o }} - {{ obdobi.do_o }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form method="post" action="{% url 'cluster' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id_obdobi" id="id_obdobi_hidden" value="{{ selected_obdobi }}">
+                        <div class="form-group form-row">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="clustering_method">Vyberte metodu shlukování:</label>
+                                    <select id="clustering_method" name="clustering_method" class="form-select">
+                                        <option value="kmeans">K-means</option>
+                                        <option value="hierarchical">Hierarchické</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="num_clusters">Počet clusterů:</label>
+                                    <input type="number" id="num_clusters" name="num_clusters" class="form-control" placeholder="Zadejte počet clusterů" required min="2" max="10">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <div class="col-md-12">
+                                <button style="width: 100%;" type="submit" class="btn btn-primary mt-4">Vygenerovat</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div> 
+        </div>
+    </div>
+    {% if poslaneci_cl %}
+    <div class="card inner-div">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Data k exportu
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <div class="table-responsive">
+                    <table id="datatablesSimple" class="table table-striped table-hover" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>ID Poslanec</th>
+                                <th>Strana/Hnutí</th>
+                                <th>Hlasování 'Ano'</th>
+                                <th>Hlasování 'Ne'</th>
+                                <th>Zdržel se/Nehlasoval</th>
+                                <th>Cluster</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for poslanec in poslaneci_cl %}
+                            <tr>
+                                <td>
+                                    <img src="{{ poslanec.foto }}" alt="Fotka {{ poslanec.foto }}">
+                                </td>
+                                <td>{{ poslanec.poslanec_id }}</td>
+                                <td>{{ poslanec.strana }}</td>
+                                <td>{{ poslanec.hlasovani_ano }}</td>
+                                <td>{{ poslanec.hlasovani_ne }}</td>
+                                <td>{{ poslanec.hlasovani_zdrzel }}</td>
+                                <td>{{ poslanec.cluster }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Foto</th>
+                                <th>ID Poslanec</th>
+                                <th>Strana/Hnutí</th>
+                                <th>Hlasování 'Ano'</th>
+                                <th>Hlasování 'Ne'</th>
+                                <th>Zdržel se/Nehlasoval</th>
+                                <th>Cluster</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+    {% endif %}
+    {% if dendogram_html %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-area me-1"></i>
+            Dendogram pro Hierarchické shlukování hlasování
+        </div>
+        <div class="card-body"><div width="100%">{{ dendogram_html|safe }}</div></div>
+    </div>
+    {% endif %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-area me-1"></i>
+            Kmeans hlasování
+        </div>
+        <div class="card-body"><div width="100%" height="30">{{sc_graph_html|safe}}</div></div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-area me-1"></i>
+            SSE graf pro Hierarchické shlukování hlasování
+        </div>
+        <div class="card-body"><div width="100%">{{sse_hi_html|safe}}</div></div>
+    </div>
+</div>
+{% endblock %}

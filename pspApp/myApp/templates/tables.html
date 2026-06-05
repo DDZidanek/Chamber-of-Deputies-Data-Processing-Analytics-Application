@@ -1,0 +1,170 @@
+{% extends "index.html" %}
+{% block content %}
+{%load static%}
+<div class="container-fluid mt-5 px-4">
+    <div class="inner-div ">
+        <h1>Náhled na data</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Domů</a></li>
+            <li class="breadcrumb-item active">Data</li>
+        </ol>
+    </div>
+    <div class="col-lg-6" style="width: 20%;">
+        <div class="card mb-4">
+            <div class="card-header">
+                Vyberte volební období
+            </div>
+            <form action="" method="get">
+                <div class="card-body ">
+                    <div class="text-center">
+                        <div class="form-row">
+                            <div>
+                                <select id="id_obdobi" name="id_obdobi" class="form-select text-center"
+                                    onchange="this.form.submit();">
+                                    <option value="-1" {% if selected_obdobi == -1 %} selected {% endif %}>
+                                        Všechna období
+                                    </option>
+                                    {% for obdobi in volebni_obdobi %}
+                                    <option value="{{ obdobi.id_obdobi }}" {% if selected_obdobi == obdobi.id_obdobi %}
+                                        selected {% endif %}>
+                                        {{ obdobi.id_obdobi__zkratka }} : {{ obdobi.od_o }} - {{ obdobi.do_o }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% if je_aktualni_obdobi %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="aktualniStav" name="aktualni_stav"
+                                    onchange="this.form.submit();">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Obsazení poslanecké sněmovny                  
+                </div>
+                <div class="card-body"><div id="obsazeniSnemovnyBar" width="100%" height="10"></div></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-pie me-1"></i>
+                    Obsazení poslanecké sněmovny
+                </div>
+                <div class="card-body"><div id="obsazeniSnemovnyPie" width="100%" height="10"></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="card inner-div">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Data k exportu
+        </div>
+        <div class="card-body">
+            <div class="px-3">
+                <div class="table-responsive">
+                    <table id="datatablesSimple" class="table table-striped table-hover" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>ID Poslanec</th>
+                                <th>ID Osoba</th>
+                                <th>Před</th>
+                                <th>Jméno</th>
+                                <th>Příjmení</th>
+                                <th>Za</th>
+                                <th>Pohlaví</th>
+                                <th>Věk</th>
+                                <th>Kraj</th>
+                                <th>Strana/Hnutí</th>
+                                <th class="funkce">Funkce</th>
+                                <th>Počet Funkcí</th>
+                                <th class="funkce">Výbory</th>
+                                <th>Počet Výborů</th>
+                                <th class="funkce">Podvýbory</th>
+                                <th>Počet Podvýborů</th>
+                                <th>Hlasování 'Ano'</th>
+                                <th>Hlasování 'Ne'</th>
+                                <th>Zdržel se/Nehlasoval</th>
+                                <th>Nepřihlášen</th>
+                                <th>Adresa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for poslanec in poslanci %}
+                            <tr>
+                                <td>
+                                    <img src="{{ poslanec.foto }}" alt="Fotka {{ poslanec.foto }}">
+                                </td>
+                                <td>{{ poslanec.id_poslanec }}</td>
+                                <td>{{ poslanec.id_osoba }}</td>
+                                <td>{{ poslanec.pred}}</td>
+                                <td>{{ poslanec.jmeno}}<br></td>
+                                <td>{{ poslanec.prijmeni }}</td>
+                                <td>{{ poslanec.za }}</td>
+                                <td>{{ poslanec.pohlavi }}</td>
+                                <td>{{ poslanec.vek }}</td>
+                                <td>{{ poslanec.kraj }}</td>
+                                <td>{{ poslanec.strana }}</td>
+                                <td class="funkce">{{ poslanec.funkce}}</td>
+                                <td>{{ poslanec.pocet_funkci}}</td>
+                                <td class="funkce">{{ poslanec.vybory}}</td>
+                                <td>{{ poslanec.pocet_vyboru}}</td>
+                                <td class="funkce">{{ poslanec.podvybory}}</td>
+                                <td>{{ poslanec.pocet_podvyboru}}</td>
+                                <td>{{ poslanec.hlasovani_ano }}</td>
+                                <td>{{ poslanec.hlasovani_ne }}</td>
+                                <td>{{ poslanec.hlasovani_zdrzel }}</td>
+                                <td>{{ poslanec.hlasovani_neprihlasen }}</td>
+                                <td>{{ poslanec.adresa }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Foto</th>
+                                <th>ID Poslanec</th>
+                                <th>ID Osoba</th>
+                                <th>Před</th>
+                                <th>Jméno</th>
+                                <th>Příjmení</th>
+                                <th>Za</th>
+                                <th>Pohlaví</th>
+                                <th>Věk</th>
+                                <th>Kraj</th>
+                                <th>Strana/Hnutí</th>
+                                <th class="funkce">Funkce</th>
+                                <th>Počet Funkcí</th>
+                                <th class="funkce">Výbory</th>
+                                <th>Počet Výborů</th>
+                                <th class="funkce">Podvýbory</th>
+                                <th>Počet Podvýborů</th>
+                                <th>Hlasování 'Ano'</th>
+                                <th>Hlasování 'Ne'</th>
+                                <th>Zdržel se/Nehlasoval</th>
+                                <th>Nepřihlášen</th>
+                                <th>Adresa</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="grafData" data-graf='{{ graf_data|safe }}'></div>
+<script>
+    var grafDataElement = document.getElementById('grafData');
+    var grafData = JSON.parse(grafDataElement.getAttribute('data-graf'));
+</script>
+{% endblock %}

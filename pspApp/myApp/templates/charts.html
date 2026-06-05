@@ -1,0 +1,214 @@
+{% extends "index.html" %}
+{% block content %}
+{%load static%}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Vizualizace dat</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="index.html">Domů</a></li>
+        <li class="breadcrumb-item active">Grafy</li>
+    </ol>
+    <div class="card mb-4">
+    </div>
+    <div class="col-lg-6" style="width: 20%;">
+        <div class="card mb-4">
+            <div class="card-header">
+                Vyberte volební období
+            </div>
+            <form action="" method="get">
+                <div class="card-body ">
+                    <div class="text-center">
+                        <div class="form-row">
+                            <div>
+                                <select id="id_obdobi" name="id_obdobi" class="form-select text-center"
+                                    onchange="this.form.submit();">
+                                    <option value="-1" {% if selected_obdobi == -1 %} selected {% endif %}>
+                                        Všechna období
+                                    </option>
+                                    {% for obdobi in volebni_obdobi %}
+                                    <option value="{{ obdobi.id_obdobi }}" {% if selected_obdobi == obdobi.id_obdobi %}
+                                        selected {% endif %}>
+                                        {{ obdobi.id_obdobi__zkratka }} : {{ obdobi.od_o }} - {{ obdobi.do_o }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            {% if je_aktualni_obdobi %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="aktualniStav" name="aktualni_stav"
+                                    onchange="this.form.submit();">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header position-relative">
+            <i class="fas fa-chart-area me-1"></i>
+            Obsazení stran jednotlivých krajů
+        </div>
+        <div class="card-body"><div id="krajeStranyGraf" width="100%" height="35"></div></div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-area me-1"></i>
+            Hlasování politických stran
+        </div>
+        <div class="card-body"><div id="hlasovaniStranyGrafBar" width="100%" height="30"></div></div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-area me-1"></i>
+            Hlasování politických stran
+        </div>
+        <div class="card-body"><div id="hlasovaniStranyGrafLine" width="100%" height="30"></div></div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-area me-1"></i>
+            Obsazení výborů
+        </div>
+        <div class="card-body"><div id="vyboryGraf" width="100%" height="30"></div></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Medián a průměrný věk poslanců
+                </div>
+                <div class="card-body"><div id="vekPoslancuBoxplot" width="100%" height="50"></div></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-pie me-1"></i>
+                    Genderové rozložení v poslanecké sněmovně
+                </div>
+                <div class="card-body"><div id="genderPie" width="100%" height="50"></div></div>
+            </div>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Rozložení poslanců ve výborech
+                </div>
+                <div class="card-body"><div id="vyboryHist" width="100%" height="30"></div></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Rozložení poslanců ve výborech
+                </div>
+                <div class="card-body"><div id="vyboryMarkers" width="100%" height="30"></div></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Rozložení poslanců v podvýborech
+                </div>
+                <div class="card-body"><div id="podvyboryHist" width="100%" height="30"></div></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Rozložení poslanců v podvýborech
+                </div>
+                <div class="card-body"><div id="podvyboryMarkers" width="100%" height="30"></div></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Počet funkcí na poslance
+                </div>
+                <div class="card-body"><div id="funkceHist" width="100%" height="30"></div></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Počet funkcí na poslance
+                </div>
+                <div class="card-body"><div id="funkceMarkers" width="100%" height="30"></div></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Graf zvolení poslanců
+                </div>
+                <div class="card-body"><div id="poslaciHist" width="100%" height="30"></div></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Graf zvolení poslanců
+                </div>
+                <div class="card-body"><div id="poslaciMarkers" width="100%" height="30"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="stranyStackedGraf" kraje-graf='{{ krajeGrafJson|safe }}'></div>
+<div id="genderPieData" gender-graf='{{ genderPieJson|safe }}'></div>
+<div id="vekPoslancuData" data-vek='{{ vekPoslancuJson|safe }}'></div>
+<div id="hlasovaniStrany" hlasovani-graf='{{ hlasovaniStranyJson|safe }}'></div>
+<div id="vyboryDiv" vybory-data='{{ vyboryJson|safe }}'></div>
+<div id="legendaDiv" legenda-data='{{ legendaJson|safe }}'></div>
+<div id="histoVyboryDiv" hist-vybory='{{ histogramVybory|safe }}'></div>
+<div id="histoPodVyboryDiv" hist-podvybory='{{ histogramPodvybory|safe }}'></div>
+<div id="histoFunkceDiv" hist-funkce='{{ histogramFunkce|safe }}'></div>
+<div id="histoPoslancemDiv" hist-poslancem='{{ kolikratPoslancem|safe }}'></div>
+
+<script>
+    var dataKraje = document.getElementById('stranyStackedGraf')
+    var dataKrajeJson = JSON.parse(dataKraje.getAttribute('kraje-graf'))
+
+    var genderPieElement = document.getElementById('genderPieData');
+    var genderPieGraph = JSON.parse(genderPieElement.getAttribute('gender-graf'));
+
+    var vekPoslancuElement = document.getElementById('vekPoslancuData');
+    var vekPoslancuGraphData = JSON.parse(vekPoslancuElement.getAttribute('data-vek'));
+
+    var hlasovaniStranyElement = document.getElementById('hlasovaniStrany');    
+    var hlasovaniStranyData = JSON.parse(hlasovaniStranyElement.getAttribute('hlasovani-graf'));
+
+    var vyboryElement = document.getElementById('vyboryDiv');    
+    var legendaElement = document.getElementById('legendaDiv');
+
+    var vyboryData = JSON.parse(vyboryElement.getAttribute('vybory-data'));
+    var legendaData = JSON.parse(legendaElement.getAttribute('legenda-data'));
+
+    var vyboryHistElement = document.getElementById('histoVyboryDiv');    
+    var vyboryHistData = JSON.parse(vyboryHistElement.getAttribute('hist-vybory'));
+
+    var podvyboryHistElement = document.getElementById('histoPodVyboryDiv');        
+    var podvyboryHistData = JSON.parse(podvyboryHistElement.getAttribute('hist-podvybory'));
+
+    var funkceHistElement = document.getElementById('histoFunkceDiv');    
+    var funkceHistData = JSON.parse(funkceHistElement.getAttribute('hist-funkce'));
+
+    var poslancemHistElement = document.getElementById('histoPoslancemDiv');    
+    var poslancemHistData = JSON.parse(poslancemHistElement.getAttribute('hist-poslancem'));
+</script>
+{% endblock %}

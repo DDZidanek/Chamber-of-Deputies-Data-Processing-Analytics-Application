@@ -1,0 +1,5 @@
+data = {"Jihomoravsk\u00fd": {"KSCM": 3, "VV": 3, "ODS": 6, "CSSD": 7, "TOP09": 4}, "Olomouck\u00fd": {"VV": 2, "ODS": 2, "KSCM": 2, "CSSD": 4, "TOP09": 2}, "Vyso\u010dina": {"CSSD": 4, "ODS": 2, "TOP09": 2, "KSCM": 2, "VV": 1}, "Jiho\u010desk\u00fd": {"CSSD": 3, "ODS": 4, "TOP09": 3, "KSCM": 2, "VV": 1}, "Hlavn\u00ed m\u011bsto Praha": {"VV": 3, "ODS": 8, "KSCM": 2, "TOP09": 8, "CSSD": 7}, "St\u0159edo\u010desk\u00fd": {"ODS": 10, "TOP09": 6, "CSSD": 6, "KSCM": 3, "VV": 3}, "Kr\u00e1lov\u00e9hradeck\u00fd": {"CSSD": 3, "TOP09": 3, "ODS": 5, "KSCM": 1, "VV": 1}, "Moravskoslezsk\u00fd": {"TOP09": 3, "VV": 3, "ODS": 5, "KSCM": 3, "CSSD": 9}, "Karlovarsk\u00fd": {"ODS": 1, "KSCM": 1, "TOP09": 1, "CSSD": 1, "VV": 1}, "Pardubick\u00fd": {"TOP09": 2, "ODS": 3, "VV": 2, "CSSD": 3, "KSCM": 1}, "\u00dasteck\u00fd": {"TOP09": 2, "CSSD": 6, "ODS": 4, "KSCM": 2, "VV": 2}, "Plze\u0148sk\u00fd": {"CSSD": 6, "TOP09": 2, "KSCM": 2, "ODS": 3, "VV": 1}, "Libereck\u00fd": {"TOP09": 2, "KSCM": 1, "ODS": 2, "CSSD": 2, "VV": 1}, "Zl\u00ednsk\u00fd": {"TOP09": 2, "KSCM": 1, "ODS": 4, "CSSD": 5, "VV": 1}}
+
+kraje = list(data.keys())
+
+print(kraje)

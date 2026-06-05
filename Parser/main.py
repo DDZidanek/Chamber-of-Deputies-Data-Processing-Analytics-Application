@@ -1,0 +1,133 @@
+from poslanciOsobyParser import PoslanciAosoby
+from hlasovaniParser import HlasovaniParser
+from shuzeParser import ShuzeParser
+from ustniInterpelaceParser import UstniInterpelaceParser
+
+
+def main():
+
+    print("Poslanci a Osoby")
+    poslaniciOsoby = PoslanciAosoby()
+    poslaniciOsoby.osobyParser("/home/dd/BP_MLC0044/Data/poslanci/osoby.unl")
+    poslaniciOsoby.typOrganuParser("/home/dd/BP_MLC0044/Data/poslanci/typ_organu.unl")
+    poslaniciOsoby.typFunkceParser("/home/dd/BP_MLC0044/Data/poslanci/typ_funkce.unl")
+    poslaniciOsoby.funkceParser("/home/dd/BP_MLC0044/Data/poslanci/funkce.unl")
+    poslaniciOsoby.organyParser("/home/dd/BP_MLC0044/Data/poslanci/organy.unl")
+    poslaniciOsoby.zarazeniParser("/home/dd/BP_MLC0044/Data/poslanci/zarazeni.unl")
+    poslaniciOsoby.poslanecParser("/home/dd/BP_MLC0044/Data/poslanci/poslanec.unl")
+    poslaniciOsoby.pkgpsParser("/home/dd/BP_MLC0044/Data/poslanci/pkgps.unl")
+    poslaniciOsoby.osobaExtraParser("/home/dd/BP_MLC0044/Data/poslanci/osoba_extra.unl")
+    print("-------------------------------")
+
+    # hlasovani = HlasovaniParser()
+
+    # print("Hlasovani!")
+    # hlasovani.hlhlasovaniDelete()
+
+    # print("Hlasovani 2021")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-2021ps/zmatecne.unl")
+    # hlasovani.hlVazbyParser("/home/dd/BP_MLC0044/Data/hl-2021ps/hl2021v.unl")
+    # hlasovani.hlzPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2021ps/hl2021x.unl")
+    # #neni hl_check
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-2021ps/omluvy.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2021ps/hl2021h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2021ps/hl2021h2.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-2021ps/hl2021s.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 2017")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2017ps/hl2017h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2017ps/hl2017h2.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-2017ps/hl2017s.unl")
+    # hlasovani.hlVazbyParser("/home/dd/BP_MLC0044/Data/hl-2017ps/hl2017v.unl")
+    # hlasovani.hlzPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2017ps/hl2017x.unl")
+    # hlasovani.hlCheckParser("/home/dd/BP_MLC0044/Data/hl-2017ps/hl2017z.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-2017ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-2017ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 2013")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2013ps/hl2013h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2013ps/hl2013h2.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-2013ps/hl2013s.unl")
+    # hlasovani.hlVazbyParser("/home/dd/BP_MLC0044/Data/hl-2013ps/hl2013v.unl")
+    # hlasovani.hlzPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2013ps/hl2013x.unl")
+    # hlasovani.hlCheckParser("/home/dd/BP_MLC0044/Data/hl-2013ps/hl2013z.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-2013ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-2013ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 2010")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2010ps/hl2010h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2010ps/hl2010h2.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-2010ps/hl2010s.unl")
+    # hlasovani.hlVazbyParser("/home/dd/BP_MLC0044/Data/hl-2010ps/hl2010v.unl")
+    # hlasovani.hlzPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2010ps/hl2010x.unl")
+    # hlasovani.hlCheckParser("/home/dd/BP_MLC0044/Data/hl-2010ps/hl2010z.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-2010ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-2010ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 2006")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2006ps/hl2006h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2006ps/hl2006h2.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-2006ps/hl2006s.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-2006ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-2006ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 2002")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2002ps/hl2002h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2002ps/hl2002h2.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-2002ps/hl2002h3.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-2002ps/hl2002s.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-2002ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-2002ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 1998")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-1998ps/hl1998h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-1998ps/hl1998h2.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-1998ps/hl1998h3.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-1998ps/hl1998s.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-1998ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-1998ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 1996")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-1996ps/hl1996h1.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-1996ps/hl1996s.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-1996ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-1996ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Hlasovani 1993")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-1993ps/hl1993h1.unl")
+    # hlasovani.hlPoslanecParser("/home/dd/BP_MLC0044/Data/hl-1993ps/hl1993h2.unl")
+    # hlasovani.hlhlasovaniParser("/home/dd/BP_MLC0044/Data/hl-1993ps/hl1993s.unl")
+    # hlasovani.omluvyParser("/home/dd/BP_MLC0044/Data/hl-1993ps/omluvy.unl")
+    # hlasovani.zmatecneParser("/home/dd/BP_MLC0044/Data/hl-1993ps/zmatecne.unl")
+    # print("-------------------------------")
+
+    # print("Schuze")
+    # schuze = ShuzeParser()
+    # schuze.schuzeParser("/home/dd/BP_MLC0044/Data/schuze/schuze.unl")
+    # schuze.bodSchuzeParser("/home/dd/BP_MLC0044/Data/schuze//bod_schuze.unl")
+    # schuze.bodStavParser("/home/dd/BP_MLC0044/Data/schuze//bod_stav.unl")
+    # schuze.schuzeStavParser("/home/dd/BP_MLC0044/Data/schuze/schuze_stav.unl")
+    # schuze.TypProjednavaniParser()
+    # schuze.DruhBoduParser()
+    # print("-------------------------------")
+
+    # print("Ustni Interpelace")
+    # ustniInterpelace = UstniInterpelaceParser()
+    # ustniInterpelace.losInterpelaciParser("/home/dd/BP_MLC0044/Data/interp/li.unl")
+    # ustniInterpelace.poradiParser("/home/dd/BP_MLC0044/Data/interp/poradi.unl")
+    # ustniInterpelace.uiStavParser("/home/dd/BP_MLC0044/Data/interp/p-stav.unl")
+    # ustniInterpelace.uitypvParser("/home/dd/BP_MLC0044/Data/interp/uitypv.unl")
+    # ustniInterpelace.TypInterpelaceParser()
+    # print("-------------------------------")
+
+
+if __name__ == "__main__":
+    main()
